@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>行銷儲值試算器</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      line-height: 1.6;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+    input {
+      width: 100px;
+      text-align: right;
+    }
+    .result {
+      color: #007BFF;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h2>行銷儲值試算器</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>行銷渠道</th>
+        <th>儲值金額</th>
+        <th>報價金額（含稅）</th>
+        <th>換算封數</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Email</td>
+        <td><input type="number" id="emailValue" value="6000"></td>
+        <td class="result" id="emailTax">6300</td>
+        <td class="result" id="emailCount">60000</td>
+      </tr>
+      <tr>
+        <td>簡訊</td>
+        <td><input type="number" id="smsValue" value="40000"></td>
+        <td class="result" id="smsTax">42000</td>
+        <td class="result" id="smsCount">400000</td>
+      </tr>
+    </tbody>
+  </table>
+  <button onclick="calculate()">重新計算</button>
+
+  <script>
+    function calculate() {
+      // Email
+      const emailValue = parseFloat(document.getElementById('emailValue').value) || 0;
+      const emailTax = emailValue * 1.05; // 含稅公式
+      const emailCount = emailValue * 10; // 換算封數公式
+      document.getElementById('emailTax').textContent = emailTax.toFixed(2);
+      document.getElementById('emailCount').textContent = emailCount.toFixed(0);
+
+      // 簡訊
+      const smsValue = parseFloat(document.getElementById('smsValue').value) || 0;
+      const smsTax = smsValue * 1.05; // 含稅公式
+      const smsCount = smsValue * 10; // 換算封數公式
+      document.getElementById('smsTax').textContent = smsTax.toFixed(2);
+      document.getElementById('smsCount').textContent = smsCount.toFixed(0);
+    }
+  </script>
+</body>
+</html>
